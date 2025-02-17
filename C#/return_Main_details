@@ -1,0 +1,144 @@
+In C#, the **`Main` method** is the **entry point** of a program. When the program starts, it looks for the `Main` method to begin execution. There are several valid signatures for the `Main` method, each offering different functionality. Let’s break down the purpose and differences:
+
+---
+
+### 1. **`static void Main()`**
+- **Signature**: 
+  ```csharp
+  static void Main()
+  {
+      // Code here
+  }
+  ```
+- **Explanation**:  
+  - This is the simplest and most common form of the `Main` method.
+  - `void` means the method **does not return any value**.
+  - No arguments are passed.
+  - Suitable for simple programs that do not require command-line arguments or return values.
+
+---
+
+### 2. **`static int Main()`**
+- **Signature**: 
+  ```csharp
+  static int Main()
+  {
+      // Code here
+      return 0; // Exit code
+  }
+  ```
+- **Explanation**:  
+  - `int` specifies that the method **returns an integer** (usually an **exit code**).
+  - A **return value of `0`** typically indicates the program ran successfully.
+  - Useful for programs where you want to indicate success or failure to an external system (e.g., batch scripts).
+
+---
+
+### 3. **`static void Main(string[] args)`**
+- **Signature**: 
+  ```csharp
+  static void Main(string[] args)
+  {
+      // Access command-line arguments
+      foreach (string arg in args)
+      {
+          Console.WriteLine(arg);
+      }
+  }
+  ```
+- **Explanation**:  
+  - The `string[] args` parameter allows the program to **accept command-line arguments**.
+  - Each element in `args` is a command-line argument.
+  - Useful for passing configurations or data when running the program.
+
+---
+
+### 4. **`static int Main(string[] args)`**
+- **Signature**: 
+  ```csharp
+  static int Main(string[] args)
+  {
+      // Process arguments and return a status code
+      if (args.Length > 0)
+      {
+          Console.WriteLine("Arguments received");
+      }
+      return 0; // Exit code
+  }
+  ```
+- **Explanation**:  
+  - Combines the functionality of returning an exit code with accepting command-line arguments.
+
+---
+
+### 5. **`static async Task Main()`**
+- **Signature**:
+  ```csharp
+  static async Task Main()
+  {
+      await Task.Delay(1000); // Simulate asynchronous operation
+      Console.WriteLine("Async Main completed");
+  }
+  ```
+- **Explanation**:  
+  - `async` indicates that the method can **contain asynchronous code**.
+  - `Task` represents an asynchronous operation with no return value.
+  - Allows the `Main` method to await asynchronous operations (e.g., network requests).
+
+---
+
+### 6. **`static async Task<int> Main()`**
+- **Signature**:
+  ```csharp
+  static async Task<int> Main()
+  {
+      await Task.Delay(1000); // Simulate asynchronous operation
+      Console.WriteLine("Async Main with int return completed");
+      return 0; // Exit code
+  }
+  ```
+- **Explanation**:  
+  - Allows asynchronous operations and **returns an integer exit code**.
+  - Useful for indicating success/failure in asynchronous programs.
+
+---
+
+### 7. **`static async Task Main(string[] args)`**
+- **Signature**:
+  ```csharp
+  static async Task Main(string[] args)
+  {
+      await Task.Delay(1000);
+      Console.WriteLine($"First argument: {args.FirstOrDefault()}");
+  }
+  ```
+- **Explanation**:  
+  - Accepts **command-line arguments** and can run **asynchronous code**.
+  - Suitable for modern applications that may use asynchronous I/O or networking.
+
+---
+
+### 8. **`static async Task<int> Main(string[] args)`**
+- **Signature**:
+  ```csharp
+  static async Task<int> Main(string[] args)
+  {
+      await Task.Delay(1000);
+      Console.WriteLine("Async Main with arguments");
+      return 0; // Exit code
+  }
+  ```
+- **Explanation**:  
+  - Combines all functionality: **asynchronous code, command-line arguments, and exit code**.
+  - Most versatile form of the `Main` method.
+
+---
+
+### **Why Use These Different Signatures?**
+
+1. **Simple Execution:** `static void Main()` or `static int Main()` is sufficient for basic programs.
+2. **Command-Line Arguments:** Use `Main(string[] args)` if you need to configure behavior based on arguments.
+3. **Exit Codes:** `int Main()` or `Task<int> Main()` is helpful for signaling program success or failure.
+4. **Asynchronous Code:** `async Task Main()` allows modern, non-blocking operations for better performance in I/O-heavy applications.
+
+Choosing the right signature depends on the program’s complexity and requirements!
